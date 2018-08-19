@@ -1,0 +1,8 @@
+{
+  "name": "givdo_app_new",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
