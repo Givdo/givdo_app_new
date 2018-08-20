@@ -10,6 +10,15 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { WelcomePage } from '../pages/welcome/welcome';
+import { HttpModule } from '@angular/http';//We need this to use Http, or we will get a NullInjectorError
+import { Facebook } from '@ionic-native/facebook';//This is the module we installed with the 'ionic cordova add <APP_ID> <APP_NAME>' command
+
+//import { Storage } from '@ionic/storage';  //Don't do this. Ionic keeps changing their syntax and it doesn't work anymore. 
+import { IonicStorageModule } from '@ionic/storage' //Do this instead. Must be a lower case S in 'storage.'
+
+import { AuthProvider } from '../providers/auth';
+
 
 @NgModule({
   declarations: [
@@ -17,11 +26,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    WelcomePage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    HttpModule,
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,12 +41,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    WelcomePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Facebook,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}
